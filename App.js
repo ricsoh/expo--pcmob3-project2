@@ -12,16 +12,20 @@ function HomeScreen({ navigation }) {
 
  useEffect(() => {
   navigation.setOptions({
-    headerRight: () => <Button onPress={addColor} title="Add color" />,
-    headerLeft: () => <Button onPress={resetColor} title="Reset color" />,
+    headerRight: () => 
+      <TouchableOpacity style={styles.button} onPress={addColor}>
+        <Text style={styles.buttonText}>Add color</Text>
+      </TouchableOpacity>,
+    headerLeft: () => 
+    <TouchableOpacity style={styles.button} onPress={resetColor}>
+      <Text style={styles.buttonText}>Reset color</Text>
+    </TouchableOpacity>,
   });
  });
 
  function renderItem({ item }) {
    return (
-     <TouchableOpacity
-       onPress={() => navigation.navigate("DetailsScreen", { ...item })}
-     >
+     <TouchableOpacity onPress={() => navigation.navigate("DetailsScreen", { ...item })}>
        <BlockRGB red={item.red} green={item.green} blue={item.blue} />
      </TouchableOpacity>
    );
@@ -97,4 +101,15 @@ const styles = StyleSheet.create({
    fontSize: 24,
    marginBottom: 20,
  },
+ button: {
+  width: 56,
+  padding: 8,
+  borderRadius: 10,
+  marginRight: 15,
+},
+buttonText: {
+  fontSize: 12,
+  textAlign: 'center',
+  color: '#2196F3',
+}, 
 });
