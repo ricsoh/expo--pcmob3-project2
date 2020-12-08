@@ -57,18 +57,16 @@ return (
 function DetailsScreen({ route }) {
  // Destructure this object so we don't have to type route.params.red etc
  const { red, green, blue } = route.params;
+ const total = red + green + blue;
 
  return (
    <View
      style={[
-       styles.container,
-       { backgroundColor: `rgb(${red}, ${green}, ${blue})` },
-     ]}
-   >
+       styles.container, { backgroundColor: `rgb(${red}, ${green}, ${blue})` },]} >
      <View style={{ padding: 30 }}>
-       <Text style={styles.detailText}>Red: {red}</Text>
-       <Text style={styles.detailText}>Green: {green}</Text>
-       <Text style={styles.detailText}>Blue: {blue}</Text>
+       <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Red: {red}</Text>
+       <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Green: {green}</Text>
+       <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Blue: {blue}</Text>
      </View>
    </View>
  );
@@ -97,11 +95,17 @@ const styles = StyleSheet.create({
  list: {
    width: "100%",
  },
- detailText: {
+ detailTextWhite: {
    fontSize: 24,
+   color: 'white',
    marginBottom: 20,
  },
- button: {
+ detailTextBlack: {
+  fontSize: 24,
+  color: 'black',
+  marginBottom: 20,
+},
+button: {
   width: 56,
   padding: 8,
   borderRadius: 10,
