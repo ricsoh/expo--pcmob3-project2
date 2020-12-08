@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import BlockRGB from "./components/BlockRGB";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+
 function HomeScreen({ navigation }) {
  const [colorArray, setColorArray] = useState([]);
 
@@ -26,18 +27,28 @@ function HomeScreen({ navigation }) {
        red: Math.floor(Math.random() * 256),
        green: Math.floor(Math.random() * 256),
        blue: Math.floor(Math.random() * 256),
-       id: `${colorArray.length}`,
+       id: colorArray.length.toString()
      },
    ]);
- }
+}
 
- return (
+function resetColor() {
+  setColorArray([]);
+}
+
+return (
    <View style={styles.container}>
      <TouchableOpacity
        style={{ height: 40, justifyContent: "center" }}
        onPress={addColor}
      >
-       <Text style={{ color: "red" }}>Add colour</Text>
+       <Text style={{ color: "blue" }}>Add colour</Text>
+     </TouchableOpacity>
+     <TouchableOpacity
+       style={{ height: 40, justifyContent: "center" }}
+       onPress={resetColor}
+     >
+       <Text style={{ color: "red" }}>Reset colour</Text>
      </TouchableOpacity>
      <FlatList style={styles.list} data={colorArray} renderItem={renderItem} />
    </View>
@@ -70,8 +81,8 @@ export default function App() {
  return (
    <NavigationContainer>
      <Stack.Navigator>
-       <Stack.Screen name="Colour List" component={HomeScreen} />
-       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <Stack.Screen name="Colour List (九层糕)" component={HomeScreen} />
+      <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
      </Stack.Navigator>
    </NavigationContainer>
  );
