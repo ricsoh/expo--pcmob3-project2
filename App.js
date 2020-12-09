@@ -60,15 +60,23 @@ function DetailsScreen({ route }) {
  // Destructure this object so we don't have to type route.params.red etc
  const { red, green, blue } = route.params;
  const total = red + green + blue;
+ const textRed = 255 - red;
+ const textGreen = 255 - green;
+ const textBlue = 255 - blue;
 
  return (
    <View
      style={[
        styles.container, { backgroundColor: `rgb(${red}, ${green}, ${blue})` },]} >
      <View style={{ padding: 30 }}>
+       <Text style={{color: `rgb(${textRed}, ${textGreen}, ${textBlue})`, fontSize: 24, fontWeight: 'bold', marginBottom: 20}}>Red: {textRed}</Text>
+       <Text style={{color: `rgb(${textRed}, ${textGreen}, ${textBlue})`, fontSize: 24, fontWeight: 'bold', marginBottom: 20}}>Green: {textGreen}</Text>
+       <Text style={{color: `rgb(${textRed}, ${textGreen}, ${textBlue})`, fontSize: 24, fontWeight: 'bold', marginBottom: 20}}>Blue: {textBlue}</Text>
+       {/*
        <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Red: {red}</Text>
        <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Green: {green}</Text>
        <Text style={total<350 ? styles.detailTextWhite : styles.detailTextBlack}>Blue: {blue}</Text>
+       */}
      </View>
    </View>
  );
