@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import { StyleSheet, Text, View, FlatList, Button, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import BlockRGB from "./components/BlockRGB";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+const screenWidth = Dimensions.get("window").width;
+var numColumns = 4;
 
 function HomeScreen({ navigation }) {
  const [colorArray, setColorArray] = useState([]);
@@ -25,7 +27,7 @@ function HomeScreen({ navigation }) {
 
  function renderItem({ item }) {
    return (
-     <TouchableOpacity onPress={() => navigation.navigate("DetailsScreen", { ...item })}>
+     <TouchableOpacity style={styles.itemColumn} onPress={() => navigation.navigate("DetailsScreen", { ...item })}>
        <BlockRGB red={item.red} green={item.green} blue={item.blue} />
      </TouchableOpacity>
    );
@@ -49,7 +51,7 @@ function resetColor() {
 
 return (
    <View style={styles.container}>
-     <FlatList style={styles.list} data={colorArray} renderItem={renderItem} />
+     <FlatList style={styles.list} data={colorArray} renderItem={renderItem} numColumns={numColumns} />
    </View>
  );
 }
@@ -87,14 +89,14 @@ export default function App() {
 
 const styles = StyleSheet.create({
  container: {
-   flex: 1,
-   backgroundColor: "#fff",
-   alignItems: "center",
-   justifyContent: "center",
+  flex: 1,
+  backgroundColor: "#fff",
+  alignItems: "center",
+  justifyContent: "center",
  },
  list: {
-   width: "100%",
- },
+  width: "100%",
+  },
  detailTextWhite: {
    fontSize: 24,
    color: 'white',
@@ -115,5 +117,9 @@ buttonText: {
   fontSize: 12,
   textAlign: 'center',
   color: '#2196F3',
-}, 
+},
+itemColumn: {
+  width: screenWidth / numColumns,
+  aspectRatio: 1,
+},
 });
